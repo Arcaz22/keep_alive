@@ -13,7 +13,7 @@ jobs:
     - name: Ping Finance DB
       run: |
         STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-          "${{ secrets.SUPABASE_URL_FINANCE }}/rest/v1/" \
+          "${{ secrets.SUPABASE_URL_FINANCE }}/rest/v1/sys_telegram_user?limit=1" \
           -H "apikey: ${{ secrets.SUPABASE_KEY_FINANCE }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_KEY_FINANCE }}")
         echo "Finance DB status: $STATUS"
@@ -22,7 +22,7 @@ jobs:
     - name: Ping Store DB
       run: |
         STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-          "${{ secrets.SUPABASE_URL_STORE }}/rest/v1/" \
+          "${{ secrets.SUPABASE_URL_STORE }}/rest/v1/products?limit=1" \
           -H "apikey: ${{ secrets.SUPABASE_KEY_STORE }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_KEY_STORE }}")
         echo "Store DB status: $STATUS"
@@ -31,7 +31,7 @@ jobs:
     - name: Ping Landing Page DB
       run: |
         STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-          "${{ secrets.SUPABASE_URL_LANDING }}/rest/v1/" \
+          "${{ secrets.SUPABASE_URL_LANDING }}/rest/v1/portfolios?limit=1" \
           -H "apikey: ${{ secrets.SUPABASE_KEY_LANDING }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_KEY_LANDING }}")
         echo "Landing DB status: $STATUS"
