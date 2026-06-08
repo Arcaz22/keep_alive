@@ -10,26 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Ping Finance DB
-        run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "${{ secrets.SUPABASE_URL_FINANCE }}/rest/v1/" \
-            -H "apikey: ${{ secrets.SUPABASE_KEY_FINANCE }}")
-          echo "Finance DB status: $STATUS"
-          [ "$STATUS" = "200" ] && echo "✅ OK" || echo "❌ GAGAL"
+    - name: Ping Finance DB
+      run: |
+        STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+          "${{ secrets.SUPABASE_URL_FINANCE }}/rest/v1/" \
+          -H "apikey: ${{ secrets.SUPABASE_KEY_FINANCE }}" \
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_KEY_FINANCE }}")
+        echo "Finance DB status: $STATUS"
+        [ "$STATUS" = "200" ] && echo "✅ OK" || echo "❌ GAGAL"
 
-      - name: Ping Store DB
-        run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "${{ secrets.SUPABASE_URL_STORE }}/rest/v1/" \
-            -H "apikey: ${{ secrets.SUPABASE_KEY_STORE }}")
-          echo "Store DB status: $STATUS"
-          [ "$STATUS" = "200" ] && echo "✅ OK" || echo "❌ GAGAL"
+    - name: Ping Store DB
+      run: |
+        STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+          "${{ secrets.SUPABASE_URL_STORE }}/rest/v1/" \
+          -H "apikey: ${{ secrets.SUPABASE_KEY_STORE }}" \
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_KEY_STORE }}")
+        echo "Store DB status: $STATUS"
+        [ "$STATUS" = "200" ] && echo "✅ OK" || echo "❌ GAGAL"
 
-      - name: Ping Landing Page DB
-        run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "${{ secrets.SUPABASE_URL_LANDING }}/rest/v1/" \
-            -H "apikey: ${{ secrets.SUPABASE_KEY_LANDING }}")
-          echo "Landing DB status: $STATUS"
-          [ "$STATUS" = "200" ] && echo "✅ OK" || echo "❌ GAGAL"
+    - name: Ping Landing Page DB
+      run: |
+        STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+          "${{ secrets.SUPABASE_URL_LANDING }}/rest/v1/" \
+          -H "apikey: ${{ secrets.SUPABASE_KEY_LANDING }}" \
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_KEY_LANDING }}")
+        echo "Landing DB status: $STATUS"
+        [ "$STATUS" = "200" ] && echo "✅ OK" || echo "❌ GAGAL"
